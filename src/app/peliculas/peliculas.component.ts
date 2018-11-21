@@ -17,54 +17,45 @@ export class PeliculasComponent implements OnInit {
   constructor(private movieService:MoviesService,private route:ActivatedRoute) { 
     this.movies = movieService.getMovies();
     this.status = this.route.snapshot.params['status'];
-    this.textButton = (this.status == 'create') ? 'Crear imagen' : 'Actualizar imagen';
+    this.textButton = (this.status == 'create') ? 'Crear pelicula' : 'Actualizar pelicula';
   }
-
-
-validateStatusButton(){
-    if (this.status == 'create') {
-        this.createMovie();
-    } else {
-        this.updateMovie();
-    }
-}
 
   ngOnInit() {
   }
-  createMovie() {
-    this.movie.id = Date.now();
-    this.movieService.createMovie(this.movie);
+    validateStatusButton(){
+      if (this.status == 'create') {
+          this.createMovie();
+      } else {
+          this.updateMovie();
+      }
   }
-  deleteMovie(){
-    
-    this.movieService.deleteMovie();
+
+  getMovie(id){
+      this.movieService.getMovie(id).valueChanges().subscribe(movie => {
+          this.movie = movie;
+          this.textButton = 'Actualizar pelicula';
+          this.status = id;
+      });
   }
 
   cancelMovie(){
-    this.status = 'create';
-    this.textButton = 'Crear imagen';
-    this.movie = {};
-
-}
-getMovie(id){
-      this.movieService.getMovies().subscribe(movie => {
-      this.movies = this.movies;
-      this.textButton = 'Actualizar imagen';
-      this.status = id;
-  });
-}
-
-  updateMovie(){
-    this.movieService.updateMovie(this.movie);
-    this.cancelMovie();
-
-    
-}
-  
-  cleanForm() {
-
-    this.movie = {};
-
+      this.status = 'create';
+      this.textButton = 'Crear pelicula';
+      this.movie = {};
   }
 
+  createMovie() {
+      this.movie.id = Date.now();
+      this.movieService.createMovie(this.movie);
+      this.cancelMovie();
+  }
+
+  updateMovie(){
+      this.movieService.updateMovie(this.movie);
+      this.cancelMovie();
+  }
+
+  deleteMovie(id){
+      this.movieService.deleteMovie(id);
+  }
 }

@@ -8,22 +8,23 @@ export class MoviesService {
   constructor(private db:AngularFireDatabase) { }
 
 
-  public createMovie(movie) {
-    this.db.database.ref('movies/'+movie.id).set(movie);
-    // this.db.database.ref('personas/').set(person);
+public getMovies() {        
+    return this.db.list('movie').valueChanges();
 }
 
-public getMovies() {
-    return this.db.list('movies').valueChanges();
-    }
+public getMovie(id){
+    return this.db.object('movie/'+id);
+}
 
-public deleteMovie() {
-      return this.db.list('movies').remove();
-      }
+public createMovie(movie){
+    this.db.database.ref('movie/'+movie.id).set(movie);
+}
 
 public updateMovie(movie){
-        this.db.database.ref('movie/'+movie.id).set(movie);
-    }
+    this.db.database.ref('movie/'+movie.id).set(movie);
+}
 
-
+public deleteMovie(id){
+    this.db.object('movie/'+id).remove();
+}
 }

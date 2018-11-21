@@ -21,9 +21,11 @@
                           {{movie.descripcion}}
                       </div>
                   </li>
-                  <button type="button" class="btn btn-secondary" (click)="deleteMovie()">Eliminar</button>
-                  <button type="button" class="btn btn-secondary" (click)="getMovies()">Editar</button>
-
+                  <div class="row">
+                    <button type="button" class="btn btn-primary col-5" (click)="getMovie(movie.id)">Editar</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger col-5" (click)="deleteMovie(movie.id)">Eliminar</button>
+                </div>
               </div>
           </div>
           <div class="col-4">
@@ -43,10 +45,8 @@
               </div>
 
               <hr>
-              <button type="button" class="btn btn-primary" (click)="createMovie()">Guardar pelicula</button>&nbsp;
-              <button type="button" class="btn btn-secondary" (click)="cleanForm()">Cancelar</button>
               <button type="button" class="btn btn-primary" (click)="validateStatusButton()">{{textButton}}</button>&nbsp;
-
+              <button type="button" class="btn btn-secondary" (click)="cancelMovie()">Cancelar</button>
 
 
           </div>

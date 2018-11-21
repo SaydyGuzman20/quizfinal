@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { PeliculasComponent } from './peliculas/peliculas.component';
 import { HomeComponent } from './home/home.component';
 import {MoviesService} from './services/movies.service';
+import { UsersComponent } from './users/users.component';
+import { UsersService } from './services/users.service';
 
 
 import { environment } from '../environments/environment';
@@ -17,16 +19,19 @@ import { from } from 'rxjs';
 
 
 
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'movies', component: PeliculasComponent }
+  { path: 'movies/:status', component: PeliculasComponent },
+  { path: 'users/:status', component: UsersComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     PeliculasComponent,
-    HomeComponent
+    HomeComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ const appRoutes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
-  providers: [MoviesService],
+  providers: [MoviesService,UsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

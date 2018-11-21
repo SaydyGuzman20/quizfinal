@@ -1,0 +1,52 @@
+<div class="container col-8">
+ 
+
+    <form>
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Nombres" [(ngModel)]="user.nombres">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Correo electronico" [(ngModel)]="user.correo">
+          </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Celular" [(ngModel)]="user.telefono">
+          </div>
+          <hr>
+              <button type="button" class="btn btn-primary" (click)="validateStatusButton()">{{textButton}}</button>&nbsp;
+              <button type="button" class="btn btn-secondary" (click)="cancelUser()">Cancelar</button>
+        </div>
+      </form>
+
+
+          <div class="col-8">
+              <div *ngFor="let user of users | async">
+
+                  <li class="list-group-item ">
+                      <div>
+                         <h1  class="text-dark font-weight-bold">{{user.nombres}}</h1>
+                      </div>
+                      <hr>
+                      <br>
+                      <img src="data:image/png;base64,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" alt="">
+                      <br>
+                      <div>
+                          {{user.correo}}
+                      </div>
+                      <div>
+                        {{user.telefono}}
+                    </div>
+                  </li>
+                  <div class="row">
+                    <button type="button" class="btn btn-primary col-5" (click)="getUsers(user.id)">Editar</button>
+                    &nbsp;
+                    <button type="button" class="btn btn-danger col-5" (click)="deleteUser(user.id)">Eliminar</button>
+                </div>
+              </div>
+          </div>
+         
+
+      
+
+  
+</div>
