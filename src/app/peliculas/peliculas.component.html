@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="card">
+
+      <div class="card-body row" >
+
+
+
+
+          <div class="col-8">
+              <div *ngFor="let movie of movies | async">
+
+                  <li class="list-group-item ">
+                      <div>
+                         <h1  class="text-dark font-weight-bold">{{movie.titulo}}</h1>
+                      </div>
+                      <hr>
+                      <br>
+                      <img src="{{movie.imagen}}" alt="">
+                      <br>
+                      <div>
+                          {{movie.descripcion}}
+                      </div>
+                  </li>
+                  <button type="button" class="btn btn-secondary" (click)="deleteMovie()">Eliminar</button>
+                  <button type="button" class="btn btn-secondary" (click)="getMovies()">Editar</button>
+
+              </div>
+          </div>
+          <div class="col-4">
+              <h2>Nueva Pelicula</h2><br>
+              <div class="form-group">
+                  <label>Titulo</label>
+                  <input type="text" class="form-control" placeholder="Ingresar el titulo de la pelicula" [(ngModel)]="movie.titulo">
+              </div>
+              <div class="form-group">
+                  <label>Descripción</label>
+                  <textarea type="text" class="form-control" rows="5" placeholder="Ingresar una descripcion de la pelicula"
+                      [(ngModel)]="movie.descripcion"></textarea>
+              </div>
+              <div class="form-group">
+                  <label>Link de la imagen</label>
+                  <input class="form-control" placeholder="Ingresar el link de una imagen" [(ngModel)]="movie.imagen">
+              </div>
+
+              <hr>
+              <button type="button" class="btn btn-primary" (click)="createMovie()">Guardar pelicula</button>&nbsp;
+              <button type="button" class="btn btn-secondary" (click)="cleanForm()">Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="validateStatusButton()">{{textButton}}</button>&nbsp;
+
+
+
+          </div>
+
+      </div>
+
+  </div>
+</div>
